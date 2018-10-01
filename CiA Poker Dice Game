@@ -1,0 +1,812 @@
+import sys
+import random
+for x in range(6):
+    dice1 = random.randint(1, 6)
+    dice2 = random.randint(1, 6)
+    dice3 = random.randint(1, 6)
+
+def intro():
+#Global allows a variable to have the same value throughout different functions. Eg. if vchoosename was a variable in a\
+# function defined as intro() with the value of 1, and vchoosename is global and used in another function, then the\
+# vchoosename variable's value in the other function is 1
+    global vChoosename1
+    global vChoosename2
+    global vChoosename3
+    global vChoosename4
+    print("Welcome player(s) to the game of POKER DICE. To win, you need to have the most points by the end of 5 rolls.")
+    print("\nThe rules of this game are simple:\n1. Answer all the questions appropriately, or you shall be punished\n2. Be PG\n3. Have Fun!")
+    vChoosename1 = str(input("\nENTER PLAYER1 NAME: "))
+    vChoosename2 = str(input("ENTER PLAYER2 NAME(if none, type none): "))
+    if vChoosename2.lower() == "none":
+        f_roll_dice_1()
+    if vChoosename2.lower() != "none":
+        vChoosename3 = str(input("ENTER PLAYER3 NAME(if none, type none): "))
+        if vChoosename3.lower() == "none":
+            f_roll_dice_1()
+        if vChoosename3.lower() != "none":
+            vChoosename4 = str(input("ENTER PLAYER4 NAME(if none, type none): "))
+            if vChoosename4.lower() == "none":
+                f_roll_dice_1()
+
+
+def f_roll_dice_1():
+#variables
+    global vChoosename1
+    global vChoosename2
+    global points_1
+    vCount_1 = 5
+    points_1 = 0
+    vCount_internal_1 = 0
+    print("\nWould", vChoosename1, "like to roll?")
+    question1 = str(input("Yes or No: " ))
+
+    while question1.lower() != "no":
+        global vChoosename2
+    #Inputs random integers between 1 and 6 (including 1 and 6) into the following variables (dice1, dice2 and dice3)
+        dice1 = random.randint(1, 6)
+        dice2 = random.randint(1, 6)
+        dice3 = random.randint(1, 6)
+    #variable l is a list containing all three dice variables
+        l = [dice1,dice2,dice3]
+    #variable list_2 is the above variable sorted, so the list is the smallest integer to the largest integer
+        list_2 = sorted(l)
+        Even = list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0
+        Odd = list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1
+    # The below if statements are based on the dices values
+        if list_2[0] == list_2[1] == list_2[2]:
+    #if all three dices are the same
+            print(list_2)
+        #the variable's value gets added the value written at the end (underneath is the points_1 variable added 50
+            points_1 = points_1 + 50
+            vCount_1 = vCount_1 - 1
+            vCount_internal_1 = vCount_internal_1 + 1
+            print("THREE OF A KIND! Congratulations, you get 50 points!")
+        #Even is the variable that contains the code that determines if the dices are all even numbers
+            if Even:
+                points_1 = points_1 + 25
+                print("ALSO EVEN NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_1)
+                print("Number of tries left: "+str(vCount_1))
+            # if the vCount_internal_1 reaches 5, as everytime the dice is rolled the vCount_internal_1's value get's added 1, the bottom code runs
+                if vCount_internal_1 == 5:
+                    print("GAME OVER! Total points: ", points_1)
+                    if vChoosename2.lower() != "none":
+                        f_roll_dice_2()
+                    if vChoosename2.lower() == "none":
+                        Total_tally()
+                if vCount_internal_1 != 5:
+                    question1 = str(input("Roll again? " ))
+        #Odd is the variable that contains the code that determines if the dices are all odd numbers
+            if Odd:
+                points_1 = points_1 + 25
+                print("ALSO ODD NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_1)
+                print("Number of tries left: "+str(vCount_1))
+                if vCount_internal_1 == 5:
+                    print("GAME OVER! Total points: ", points_1)
+                    if vChoosename2.lower() != "none":
+                        f_roll_dice_2()
+                    if vChoosename2.lower() == "none":
+                        Total_tally()
+                if vCount_internal_1 != 5:
+                    question1 = str(input("Roll again? " ))
+        if list_2[0] < list_2[1] < list_2[2] and list_2[0] + 1 == list_2[1] and list_2[1] + 1 == list_2[2]:
+    #if the dices are straight (eg. dice1 = 1, dice2 = 2, dice3 = 3)
+            print(list_2)
+            points_1 = points_1 + 30
+            vCount_1 = vCount_1 - 1
+            vCount_internal_1 = vCount_internal_1 + 1
+            print("STRAIGHT! Congratulations, you get 30 points!")
+            print("Points: "+ str(points_1))
+            print("Number of tries left: "+str(vCount_1))
+            if vCount_internal_1 == 5:
+                print("GAME OVER! Total points: ", points_1)
+                if vChoosename2.lower() != "none":
+                    f_roll_dice_2()
+                if vChoosename2.lower() == "none":
+                    Total_tally()
+            if vCount_internal_1 != 5:
+                question1 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0 and list_2[0] != list_2[2]:
+        #if the dices are all even numbers
+            print(list_2)
+            points_1 = points_1 + 15
+            vCount_1 = vCount_1 - 1
+            vCount_internal_1 = vCount_internal_1 + 1
+            print("EVEN NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_1))
+        #This if statement also checks if any of the dices are also pairs
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_1 = points_1 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_1)
+                print("Number of tries left: "+str(vCount_1))
+                if vCount_internal_1 == 5:
+                    print("GAME OVER! Total points: ", str(points_1))
+                    if vChoosename2.lower() != "none":
+                        f_roll_dice_2()
+                    if vChoosename2.lower() == "none":
+                        Total_tally()
+                if vCount_internal_1 != 5:
+                    question1 = str(input("Roll again? " ))
+        #If the dices' values are all different
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_1))
+                if vCount_internal_1 == 5:
+                    print("GAME OVER! Total points: ", str(points_1))
+                    if vChoosename2.lower() != "none":
+                        f_roll_dice_2()
+                    if vChoosename2.lower() == "none":
+                        Total_tally()
+                if vCount_internal_1 != 5:
+                    question1 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1 and list_2[0] != list_2[2]:
+        #if the dices are all odd numbers
+            print(list_2)
+            points_1 = points_1 + 15
+            vCount_1 = vCount_1 - 1
+            vCount_internal_1 = vCount_internal_1 + 1
+            print("ODD NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_1))
+        #This if statement also checks if any of the dices are also pairs
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_1 = points_1 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_1)
+                print("Number of tries left: "+str(vCount_1))
+                if vCount_internal_1 == 5:
+                    print("GAME OVER! Total points: ", str(points_1))
+                    if vChoosename2.lower() != "none":
+                        f_roll_dice_2()
+                    if vChoosename2.lower() == "none":
+                        Total_tally()
+                if vCount_internal_1 != 5:
+                    question1 = str(input("Roll again? " ))
+        #If the dices' values are all different
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_1))
+                if vCount_internal_1 == 5:
+                    print("GAME OVER! Total points: ", points_1)
+                    if vChoosename2.lower() != "none":
+                        f_roll_dice_2()
+                    if vChoosename2.lower() == "none":
+                        Total_tally()
+                if vCount_internal_1 != 5:
+                    question1 = str(input("Roll again? " ))
+    #This long chunk of code checks if any of the dices are the same, but only if they aren't all even, odd or different numbers
+        if list_2[0] == list_2[1] and list_2[0] and list_2[1] != list_2[2] and list_2[0] % 2 and list_2[1] % 2 != list_2[2] % 2 \
+            or list_2[1] == list_2[2] and list_2[1] and list_2[2] != list_2[0] and list_2[1] % 2 and list_2[2] % 2 != list_2[0] % 2:
+            print(list_2)
+            points_1 = points_1 + 10
+            vCount_1 = vCount_1 - 1
+            vCount_internal_1 = vCount_internal_1 + 1
+            print("PAIR! Congratulations, you get 10 points!")
+            print("Points: "+ str(points_1))
+            print("Number of tries left: "+str(vCount_1))
+            if vCount_internal_1 == 5:
+                print("GAME OVER! Total points: ", points_1)
+                if vChoosename2.lower() != "none":
+                    f_roll_dice_2()
+                if vChoosename2.lower() == "none":
+                    Total_tally()
+            if vCount_internal_1 != 5:
+                question1 = str(input("Roll again? " ))
+    #This if statement checks if any of the numbers are any of the above if statements, and if their not, the below code runs
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 1 and list_2[0] != list_2[1]\
+        or list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 0 and list_2[0] != list_2[1]:
+            print(list_2)
+            print("Sorry, but you've struck out!")
+            points_1 = points_1 + 0
+            vCount_1 = vCount_1 - 1
+            vCount_internal_1 = vCount_internal_1 + 1
+            print("Points: "+ str(points_1))
+            print("Number of tries left: "+str(vCount_1))
+            if vCount_internal_1 == 5:
+                print("GAME OVER! Total points: ", points_1)
+                if vChoosename2.lower() != "none":
+                    f_roll_dice_2()
+                if vChoosename2.lower() == "none":
+                    Total_tally()
+            if vCount_internal_1 != 5:
+                question1 = str(input("Roll again? " ))
+    if question1.lower() == "no":
+        if vChoosename2.lower() != "none":
+            f_roll_dice_2()
+        if vChoosename2.lower() == "none":
+            restart_function()
+
+
+def f_roll_dice_2():
+    global vChoosename2
+    global vChoosename3
+    global points_2
+    vCount_2 = 5
+    points_2 = 0
+    vCount_internal_2 = 0
+    print("\nWould", vChoosename2, "like to roll?")
+    question2 = str(input("Yes or No: " ))
+
+    while question2.lower() != "no":
+        global vChoosename3
+        dice1 = random.randint(1, 6)
+        dice2 = random.randint(1, 6)
+        dice3 = random.randint(1, 6)
+        l = [dice1,dice2,dice3]
+        list_2 = sorted(l)
+        Even = list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0
+        Odd = list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1
+
+        if list_2[0] == list_2[1] == list_2[2]:
+            print(list_2)
+            points_2 = points_2 + 50
+            vCount_2 = vCount_2 - 1
+            vCount_internal_2 = vCount_internal_2 + 1
+            print("THREE OF A KIND! Congratulations, you get 50 points!")
+            print("Points: "+ str(points_2))
+            if Even:
+                points_2 = points_2 + 25
+                print("ALSO EVEN NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_2)
+                print("Number of tries left: "+str(vCount_2))
+                if vCount_internal_2 == 5:
+                    print("GAME OVER! Total points: ", points_2)
+                    if vChoosename3.lower() != "none":
+                        f_roll_dice_3()
+                    if vChoosename3.lower() == "none":
+                        Total_tally()
+                if vCount_internal_2 != 5:
+                    question2 = str(input("Roll again? " ))
+            if Odd:
+                points_2 = points_2 + 25
+                print("ALSO ODD NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_2)
+                print("Number of tries left: "+str(vCount_2))
+                if vCount_internal_2 == 5:
+                    print("GAME OVER! Total points: ", points_2)
+                    if vChoosename3.lower() != "none":
+                        f_roll_dice_3()
+                    if vChoosename3.lower() == "none":
+                        Total_tally()
+                if vCount_internal_2 != 5:
+                    question2 = str(input("Roll again? " ))
+        if list_2[0] < list_2[1] < list_2[2] and list_2[0] + 1 == list_2[1] and list_2[1] + 1 == list_2[2]:
+            print(list_2)
+            points_2 = points_2 + 30
+            vCount_2 = vCount_2 - 1
+            vCount_internal_2 = vCount_internal_2 + 1
+            print("STRAIGHT! Congratulations, you get 30 points!")
+            print("Points: "+ str(points_2))
+            print("Number of tries left: "+str(vCount_2))
+            if vCount_internal_2 == 5:
+                print("GAME OVER! Total points: ", points_2)
+                if vChoosename3.lower() != "none":
+                    f_roll_dice_3()
+                if vChoosename3.lower() == "none":
+                    Total_tally()
+            if vCount_internal_2 != 5:
+                question2 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0 and list_2[0] != list_2[2]:
+            print(list_2)
+            points_2 = points_2 + 15
+            vCount_2 = vCount_2 - 1
+            vCount_internal_2 = vCount_internal_2 + 1
+            print("EVEN NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_2))
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_2 = points_2 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_2)
+                print("Number of tries left: "+str(vCount_2))
+                if vCount_internal_2 == 5:
+                    print("GAME OVER! Total points: ", str(points_2))
+                    if vChoosename3.lower() != "none":
+                        f_roll_dice_3()
+                    if vChoosename3.lower() == "none":
+                        Total_tally()
+                if vCount_internal_2 != 5:
+                    question2 = str(input("Roll again? " ))
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_2))
+                if vCount_internal_2 == 5:
+                    print("GAME OVER! Total points: ", str(points_2))
+                    if vChoosename3.lower() != "none":
+                        f_roll_dice_3()
+                    if vChoosename3.lower() == "none":
+                        Total_tally()
+                if vCount_internal_2 != 5:
+                    question2 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1 and list_2[0] != list_2[2]:
+            print(list_2)
+            points_2 = points_2 + 15
+            vCount_2 = vCount_2 - 1
+            vCount_internal_2 = vCount_internal_2 + 1
+            print("ODD NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_2))
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_2 = points_2 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_2)
+                print("Number of tries left: "+str(vCount_2))
+                if vCount_internal_2 == 5:
+                    print("GAME OVER! Total points: ", str(points_2))
+                    if vChoosename3.lower() != "none":
+                        f_roll_dice_3()
+                    if vChoosename3.lower() == "none":
+                        Total_tally()
+                if vCount_internal_2 != 5:
+                    question2 = str(input("Roll again? " ))
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_2))
+                if vCount_internal_2 == 5:
+                    print("GAME OVER! Total points: ", points_2)
+                    if vChoosename3.lower() != "none":
+                        f_roll_dice_3()
+                    if vChoosename3.lower() == "none":
+                        Total_tally()
+                if vCount_internal_2 != 5:
+                    question2 = str(input("Roll again? " ))
+        if list_2[0] == list_2[1] and list_2[0] and list_2[1] != list_2[2] and list_2[0] % 2 and list_2[1] % 2 != list_2[2] % 2 \
+            or list_2[1] == list_2[2] and list_2[1] and list_2[2] != list_2[0] and list_2[1] % 2 and list_2[2] % 2 != list_2[0] % 2:
+            print(list_2)
+            points_2 = points_2 + 10
+            vCount_2 = vCount_2 - 1
+            vCount_internal_2 = vCount_internal_2 + 1
+            print("PAIR! Congratulations, you get 10 points!")
+            print("Points: "+ str(points_2))
+            print("Number of tries left: "+str(vCount_2))
+            if vCount_internal_2 == 5:
+                print("GAME OVER! Total points: ", points_2)
+                if vChoosename3.lower() != "none":
+                    f_roll_dice_3()
+                if vChoosename3.lower() == "none":
+                    Total_tally()
+            if vCount_internal_2 != 5:
+                question2 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 1 and list_2[0] != list_2[1]\
+            or list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 0 and list_2[0] != list_2[1]:
+            print(list_2)
+            print("Sorry, but you've struck out!")
+            points_2 = points_2 + 0
+            vCount_2 = vCount_2 - 1
+            vCount_internal_2 = vCount_internal_2 + 1
+            print("Points: "+ str(points_2))
+            print("Number of tries left: "+str(vCount_2))
+            if vCount_internal_2 == 5:
+                print("GAME OVER! Total points: ", points_2)
+                if vChoosename3.lower() != "none":
+                    f_roll_dice_3()
+                if vChoosename3.lower() == "none":
+                    Total_tally()
+            if vCount_internal_2 != 5:
+                question2 = str(input("Roll again? " ))
+    if question2.lower() == "no":
+        if vChoosename3.lower() != "none":
+            f_roll_dice_3()
+        if vChoosename3.lower() == "none":
+            restart_function()
+
+
+def f_roll_dice_3():
+    global vChoosename3
+    global vChoosename4
+    global points_3
+    vCount_3 = 5
+    points_3 = 0
+    vCount_internal_3 = 0
+    print("\nWould", vChoosename3, "like to roll?")
+    question3 = str(input("Yes or No: " ))
+
+    while question3.lower() != "no":
+        global vChoosename4
+        dice1 = random.randint(1, 6)
+        dice2 = random.randint(1, 6)
+        dice3 = random.randint(1, 6)
+        l = [dice1,dice2,dice3]
+        list_2 = sorted(l)
+        Even = list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0
+        Odd = list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1
+
+        if list_2[0] == list_2[1] == list_2[2]:
+            print(list_2)
+            points_3 = points_3 + 50
+            vCount_3 = vCount_3 - 1
+            vCount_internal_3 = vCount_internal_3 + 1
+            print("THREE OF A KIND! Congratulations, you get 50 points!")
+            print("Points: "+ str(points_3))
+            if Even:
+                points_3 = points_3 + 25
+                print("ALSO EVEN NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_3)
+                print("Number of tries left: "+str(vCount_3))
+                if vCount_internal_3 == 5:
+                    print("GAME OVER! Total points: ", points_3)
+                    if vChoosename4.lower() != "none":
+                        f_roll_dice_4()
+                    if vChoosename4.lower() == "none":
+                        Total_tally()
+                if vCount_internal_3 != 5:
+                    question3 = str(input("Roll again? " ))
+            if Odd:
+                points_3 = points_3 + 25
+                print("ALSO ODD NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_3)
+                print("Number of tries left: "+str(vCount_3))
+                if vCount_internal_3 == 5:
+                    print("GAME OVER! Total points: ", points_3)
+                    if vChoosename4.lower() != "none":
+                        f_roll_dice_4()
+                    if vChoosename4.lower() == "none":
+                        Total_tally()
+                if vCount_internal_3 != 5:
+                    question3 = str(input("Roll again? " ))
+        if list_2[0] < list_2[1] < list_2[2] and list_2[0] + 1 == list_2[1] and list_2[1] + 1 == list_2[2]:
+            print(list_2)
+            points_3 = points_3 + 30
+            vCount_3 = vCount_3 - 1
+            vCount_internal_3 = vCount_internal_3 + 1
+            print("STRAIGHT! Congratulations, you get 30 points!")
+            print("Points: "+ str(points_3))
+            print("Number of tries left: "+str(vCount_3))
+            if vCount_internal_3 == 5:
+                print("GAME OVER! Total points: ", points_3)
+                if vChoosename4.lower() != "none":
+                    f_roll_dice_4()
+                if vChoosename4.lower() == "none":
+                    Total_tally()
+            if vCount_internal_3 != 5:
+                question3 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0 and list_2[0] != list_2[2]:
+            print(list_2)
+            points_3 = points_3 + 15
+            vCount_3 = vCount_3 - 1
+            vCount_internal_3 = vCount_internal_3 + 1
+            print("EVEN NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_3))
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_3 = points_3 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_3)
+                print("Number of tries left: "+str(vCount_3))
+                if vCount_internal_3 == 5:
+                    print("GAME OVER! Total points: ", str(points_3))
+                    if vChoosename4.lower() != "none":
+                        f_roll_dice_4()
+                    if vChoosename4.lower() == "none":
+                        Total_tally()
+                if vCount_internal_3 != 5:
+                    question3 = str(input("Roll again? " ))
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_3))
+                if vCount_internal_3 == 5:
+                    print("GAME OVER! Total points: ", str(points_3))
+                    if vChoosename4.lower() != "none":
+                        f_roll_dice_4()
+                    if vChoosename4.lower() == "none":
+                        Total_tally()
+                if vCount_internal_3 != 5:
+                    question3 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1 and list_2[0] != list_2[2]:
+            print(list_2)
+            points_3 = points_3 + 15
+            vCount_3 = vCount_3 - 1
+            vCount_internal_3 = vCount_internal_3 + 1
+            print("ODD NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_3))
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_3 = points_3 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_3)
+                print("Number of tries left: "+str(vCount_3))
+                if vCount_internal_3 == 5:
+                    print("GAME OVER! Total points: ", str(points_3))
+                    if vChoosename4.lower() != "none":
+                        f_roll_dice_4()
+                    if vChoosename4.lower() == "none":
+                        Total_tally()
+                if vCount_internal_3 != 5:
+                    question3 = str(input("Roll again? " ))
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_3))
+                if vCount_internal_3 == 5:
+                    print("GAME OVER! Total points: ", points_3)
+                    if vChoosename4.lower() != "none":
+                        f_roll_dice_4()
+                    if vChoosename4.lower() == "none":
+                        Total_tally()
+                if vCount_internal_3 != 5:
+                    question3 = str(input("Roll again? " ))
+        if list_2[0] == list_2[1] and list_2[0] and list_2[1] != list_2[2] and list_2[0] % 2 and list_2[1] % 2 != list_2[2] % 2 \
+            or list_2[1] == list_2[2] and list_2[1] and list_2[2] != list_2[0] and list_2[1] % 2 and list_2[2] % 2 != list_2[0] % 2:
+            print(list_2)
+            points_3 = points_3 + 10
+            vCount_3 = vCount_3 - 1
+            vCount_internal_3 = vCount_internal_3 + 1
+            print("PAIR! Congratulations, you get 10 points!")
+            print("Points: "+ str(points_3))
+            print("Number of tries left: "+str(vCount_3))
+            if vCount_internal_3 == 5:
+                print("GAME OVER! Total points: ", points_3)
+                if vChoosename4.lower() != "none":
+                    f_roll_dice_4()
+                if vChoosename4.lower() == "none":
+                    Total_tally()
+            if vCount_internal_3 != 5:
+                question3 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 1 and list_2[0] != list_2[1]\
+            or list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 0 and list_2[0] != list_2[1]:
+            print(list_2)
+            print("Sorry, but you've struck out!")
+            points_3 = points_3 + 0
+            vCount_3 = vCount_3 - 1
+            vCount_internal_3 = vCount_internal_3 + 1
+            print("Points: "+ str(points_3))
+            print("Number of tries left: "+str(vCount_3))
+            if vCount_internal_3 == 5:
+                print("GAME OVER! Total points: ", points_3)
+                if vChoosename4.lower() != "none":
+                    f_roll_dice_4()
+                if vChoosename4.lower() == "none":
+                    Total_tally()
+            if vCount_internal_3 != 5:
+                question3 = str(input("Roll again? " ))
+    if question3.lower() == "no":
+        if vChoosename3.lower() != "none":
+            f_roll_dice_4()
+        if vChoosename3.lower() == "none":
+            restart_function()
+
+
+def f_roll_dice_4():
+    global vChoosename4
+    global points_4
+    vCount_4 = 5
+    points_4 = 0
+    vCount_internal_4 = 0
+    print("\nWould", vChoosename4, "like to roll?")
+    question4 = str(input("Yes or No: " ))
+
+    while question4.lower() != "no":
+        dice1 = random.randint(1, 6)
+        dice2 = random.randint(1, 6)
+        dice3 = random.randint(1, 6)
+        l = [dice1,dice2,dice3]
+        list_2 = sorted(l)
+        Even = list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0
+        Odd = list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1
+
+        if list_2[0] == list_2[1] == list_2[2]:
+            print(list_2)
+            points_4 = points_4 + 50
+            vCount_4 = vCount_4 - 1
+            vCount_internal_4 = vCount_internal_4 + 1
+            print("THREE OF A KIND! Congratulations, you get 50 points!")
+            print("Points: "+ str(points_4))
+            if Even:
+                points_4 = points_4 + 25
+                print("ALSO EVEN NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_4)
+                print("Number of tries left: "+str(vCount_4))
+                if vCount_internal_4 == 5:
+                    print("GAME OVER! Total points: ", points_4)
+                    Total_tally()
+                if vCount_internal_4 != 5:
+                    question4 = str(input("Roll again? " ))
+            if Odd:
+                points_4 = points_4 + 25
+                print("ALSO ODD NUMBERS AND PAIRS! Congratulations, you get an extra 25 points!")
+                print("Points: ", points_4)
+                print("Number of tries left: "+str(vCount_4))
+                if vCount_internal_4 == 5:
+                    print("GAME OVER! Total points: ", points_4)
+                    Total_tally()
+                if vCount_internal_4 != 5:
+                    question4 = str(input("Roll again? " ))
+        if list_2[0] < list_2[1] < list_2[2] and list_2[0] + 1 == list_2[1] and list_2[1] + 1 == list_2[2]:
+            print(list_2)
+            points_4 = points_4 + 30
+            vCount_4 = vCount_4 - 1
+            vCount_internal_4 = vCount_internal_4 + 1
+            print("STRAIGHT! Congratulations, you get 30 points!")
+            print("Points: "+ str(points_4))
+            print("Number of tries left: "+str(vCount_4))
+            if vCount_internal_4 == 5:
+                print("GAME OVER! Total points: ", points_4)
+                Total_tally()
+            if vCount_internal_4 != 5:
+                question4 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 0 and list_2[0] != list_2[2]:
+            print(list_2)
+            points_4 = points_4 + 15
+            vCount_4 = vCount_4 - 1
+            vCount_internal_4 = vCount_internal_4 + 1
+            print("EVEN NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_4))
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_4 = points_4 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_4)
+                print("Number of tries left: "+str(vCount_4))
+                if vCount_internal_4 == 5:
+                    print("GAME OVER! Total points: ", str(points_4))
+                    Total_tally()
+                if vCount_internal_4 != 5:
+                    question4 = str(input("Roll again? " ))
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_4))
+                if vCount_internal_4 == 5:
+                    print("GAME OVER! Total points: ", str(points_4))
+                    Total_tally()
+                if vCount_internal_4 != 5:
+                    question4 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 1 and list_2[0] != list_2[2]:
+            print(list_2)
+            points_4 = points_4 + 15
+            vCount_4 = vCount_4 - 1
+            vCount_internal_4 = vCount_internal_4 + 1
+            print("ODD NUMBERS! Congratulations, you get 15 points!")
+            print("Points: "+ str(points_4))
+            if list_2[0] == list_2[1] or list_2[1] == list_2[2]:
+                points_4 = points_4 + 10
+                print("ALSO PAIRS! Congratulations, you get an extra 10 points!")
+                print("Points: ", points_4)
+                print("Number of tries left: "+str(vCount_4))
+                if vCount_internal_4 == 5:
+                    print("GAME OVER! Total points: ", str(points_4))
+                    Total_tally()
+                if vCount_internal_4 != 5:
+                    question4 = str(input("Roll again? " ))
+            if list_2[0] != list_2[1] != list_2[2]:
+                print("Number of tries left: "+str(vCount_4))
+                if vCount_internal_4 == 5:
+                    print("GAME OVER! Total points: ", points_4)
+                    Total_tally()
+                if vCount_internal_4 != 5:
+                    question4 = str(input("Roll again? " ))
+        if list_2[0] == list_2[1] and list_2[0] and list_2[1] != list_2[2] and list_2[0] % 2 and list_2[1] % 2 != list_2[2] % 2 \
+            or list_2[1] == list_2[2] and list_2[1] and list_2[2] != list_2[0] and list_2[1] % 2 and list_2[2] % 2 != list_2[0] % 2:
+            print(list_2)
+            points_4 = points_4 + 10
+            vCount_4 = vCount_4 - 1
+            vCount_internal_4 = vCount_internal_4 + 1
+            print("PAIR! Congratulations, you get 10 points!")
+            print("Points: "+ str(points_4))
+            print("Number of tries left: "+str(vCount_4))
+            if vCount_internal_4 == 5:
+                print("GAME OVER! Total points: ", points_4)
+                Total_tally()
+            if vCount_internal_4 != 5:
+                question4 = str(input("Roll again? " ))
+        if list_2[0] % 2 == 0 and list_2[1] % 2 == 0 and list_2[2] % 2 == 1 and list_2[0] != list_2[1]\
+            or list_2[0] % 2 == 1 and list_2[1] % 2 == 1 and list_2[2] % 2 == 0 and list_2[0] != list_2[1]:
+            print(list_2)
+            print("Sorry, but you've struck out!")
+            points_4 = points_4 + 0
+            vCount_4 = vCount_4 - 1
+            vCount_internal_4 = vCount_internal_4 + 1
+            print("Points: "+ str(points_4))
+            print("Number of tries left: "+str(vCount_4))
+            if vCount_internal_4 == 5:
+                print("GAME OVER! Total points: ", points_4)
+                Total_tally()
+            if vCount_internal_4 != 5:
+                question4 = str(input("Roll again? " ))
+    if question4.lower() == "no":
+        Total_tally()
+
+
+def Total_tally():
+    global vChoosename1
+    global vChoosename2
+    global vChoosename3
+    global vChoosename4
+    global points_1
+    global points_2
+    global points_3
+    global points_4
+    if vChoosename2.lower() == "none":
+        print(vChoosename1, "points:", points_1)
+        print("You win! I guess...")
+        restart_function()
+    if vChoosename3.lower() == "none":
+        print("\nFINAL TOTAL POINTS:\n")
+        print(vChoosename1, "points:", points_1)
+        print(vChoosename2, "points:", points_2)
+        if points_1 > points_2:
+            print("\n", vChoosename1, "is the winner!")
+            restart_function()
+        if points_2 > points_1:
+            print("\n", vChoosename2, "is the winner!")
+            restart_function()
+        if points_1 == points_2:
+            print("IT'S A TIE! Congratulations,", vChoosename1, "and", vChoosename2)
+    if vChoosename4.lower() == "none":
+        print("\nFINAL TOTAL POINTS:\n")
+        print(vChoosename1, "points:", points_1)
+        print(vChoosename2, "points:", points_2)
+        print(vChoosename3, "points:", points_3)
+        if points_1 > points_2 and points_3:
+            print("\n", vChoosename1, "is the winner!")
+            restart_function()
+        if points_2 > points_1 and points_3:
+            print("\n", vChoosename2, "is the winner!")
+            restart_function()
+        if points_3 > points_1 and points_2:
+            print("\n", vChoosename3, "is the winner!")
+            restart_function()
+        if points_1 == points_2 and points_3 < points_1 and points_2:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename2)
+            restart_function()
+        if points_2 == points_3 and points_1 < points_3 and points_2:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename2, "and", vChoosename3)
+            restart_function()
+        if points_1 == points_3 and points_2 < points_1 and points_3:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename3)
+            restart_function()
+        if points_1 == points_2 == points_3:
+            print("\nIT'S A THREE-WAY TIE! Congratulations,", vChoosename1, ",", vChoosename2, "and", vChoosename3)
+            restart_function()
+    if vChoosename4.lower() != "none":
+        print("\nFINAL TOTAL POINTS:\n")
+        print(vChoosename1, "points:", points_1)
+        print(vChoosename2, "points:", points_2)
+        print(vChoosename3, "points:", points_3)
+        print(vChoosename4, "points:", points_4)
+        if points_1 > points_2 and points_1 > points_3 and points_1 > points_4:
+            print("\n", vChoosename1, "is the winner!")
+            restart_function()
+        if points_2 > points_1 and points_2 > points_3 and points_2 > points_4:
+            print("\n", vChoosename2, "is the winner!")
+            restart_function()
+        if points_3 > points_1 and points_3 > points_2 and points_3 > points_4:
+            print("\n", vChoosename3, "is the winner!")
+            restart_function()
+        if points_4 > points_1 and points_4 > points_2 and points_4 > points_3:
+            print("\n", vChoosename4, "is the winner!")
+            restart_function()
+        if points_1 == points_2 and points_3 and points_4 < points_1 and points_2:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename2)
+            restart_function()
+        if points_1 == points_3 and points_2 and points_4 < points_1 and points_3:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename3)
+            restart_function()
+        if points_1 == points_4 and points_1 and points_4 < points_2 and points_3:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename4)
+            restart_function()
+        if points_2 == points_3 and points_1 and points_4 < points_3 and points_2:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename2, "and", vChoosename3)
+            restart_function()
+        if points_2 == points_4 and points_2 and points_4 < points_1 and points_3:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename3)
+            restart_function()
+        if points_3 == points_4 and points_3 and points_4 < points_1 and points_2:
+            print("\nIT'S A TWO-WAY TIE! Congratulations,", vChoosename1, "and", vChoosename3)
+            restart_function()
+        if points_1 == points_2 == points_3 and points_4 < points_1 and points_2 and points_3:
+            print("\nIT'S A THREE-WAY TIE! Congratulations,", vChoosename1, ",", vChoosename2, "and", vChoosename3)
+            restart_function()
+        if points_1 == points_2 == points_4 and points_3 < points_1 and points_2 and points_4:
+            print("\nIT'S A THREE-WAY TIE! Congratulations,", vChoosename1, ",", vChoosename2, "and", vChoosename4)
+            restart_function()
+        if points_1 == points_3 == points_4 and points_2 < points_1 and points_3 and points_4:
+            print("\nIT'S A THREE-WAY TIE! Congratulations,", vChoosename1, ",", vChoosename3, "and", vChoosename4)
+            restart_function()
+        if points_2 == points_3 == points_4 and points_1 < points_2 and points_3 and points_4:
+            print("\nIT'S A THREE-WAY TIE! Congratulations,", vChoosename2, ",", vChoosename3, "and", vChoosename4)
+            restart_function()
+        if points_1 == points_2 == points_3 == points_4:
+            print("\nIT'S A FOUR-WAY TIE! Congratulations,", vChoosename1, ",", vChoosename2, ",", vChoosename3, "and", vChoosename4)
+
+def restart_function():
+    restart_question = str(input("\nWould you like to play again with same players? "))
+    if restart_question.lower() != "no":
+        f_roll_dice_1()
+    if restart_question.lower() == "no":
+        restart_question_1 = str(input("\nWould you like to play again with different players? "))
+        if restart_question_1.lower() != "no":
+            intro()
+        if restart_question_1.lower() == "no":
+            sys.exit()
+
+#main program
+intro()
+f_roll_dice_1()
