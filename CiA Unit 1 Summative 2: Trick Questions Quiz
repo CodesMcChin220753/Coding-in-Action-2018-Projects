@@ -1,0 +1,376 @@
+import sys
+
+global name
+global points
+
+def intro():
+    #Game prints out rules
+    print("Welcome to Trick Questions! The following questions' answers are not what you expect, so think outside the box!")
+    print("\nThe rules of this game is simple:\n\n\nReply to each question appropriately\n\nEvery correct answer would be recorded\n\n"
+          "Each answer should be one word, or else the answer could be considered as wrong\n\nAnd remember, THINK OUTSIDE THE BOX!")
+    agreement = str(input("\n\nI have read the rules of the game and agree to it's terms (Type yes or no): "))
+    if agreement.lower() != "yes":
+        sys.exit()
+
+def fname():
+    #global allows coder to use the value of a variable in one function in another
+    global name
+    #Game askes for player's name
+    name = str(input("\n\nPlease enter your name: "))
+
+#This function askes player question 1
+def question1():
+    global name
+    global points
+    #Value of points right now is 0
+    points = 0
+    print("\nOkay",name,", question 1: Name the cheese that is made backwards(You don't have to write cheese afterwards, just name the type of cheese)")
+    answer = str(input("Answer: "))
+    #if the answer is correct, then the below code runs
+    if answer.lower() == "edam":
+        #Because player got the question correct, the value of their points is added by 1
+        points = points+1
+        print("The answer is: Edam cheese! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    #If the answer is wrong, then the below code runs
+    if answer.lower() != "edam":
+        points = points+0
+        print("The answer is: Edam cheese. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question2():
+    global name
+    global points
+    print("\nOkay",name,", question 2: What is full of holes, but can still hold water?")
+    answer = str(input("Answer: A "))
+    if answer.lower() == "sponge":
+        points = points+1
+        print("The answer is: A sponge! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "sponge":
+        points = points+0
+        print("The answer is: A sponge. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question3():
+    global name
+    global points
+    print("\nOkay",name,", question 3: Which character appears first in 'Star Wars: The Last Jedi' (Hint: It's a nameable character and not two words)")
+    answer = str(input("Answer: "))
+    if answer.lower() == "s":
+        points = points+1
+        print("The answer is: The letter s! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "s":
+        points = points+0
+        print("The answer is: The letter s. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question4():
+    global name
+    global points
+    print("\nOkay",name,", question 4: What lives when you feed it, but dies when you give is a drink?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "fire":
+        points = points+1
+        print("The answer is: Fire! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "fire":
+        points = points+0
+        print("The answer is: Fire. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question5():
+    global name
+    global points
+    print("\nOkay",name,", question 5: What breaks everytime you name it?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "silence":
+        points = points+1
+        print("The answer is: Silence! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "silence":
+        points = points+0
+        print("The answer is: Silence. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question6():
+    global name
+    global points
+    print("\nOkay",name,", question 6: What can one catch, but not throw?")
+    answer = str(input("Answer: A "))
+    if answer.lower() == "cold":
+        points = points+1
+        print("The answer is: A cold! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "cold":
+        points = points+0
+        print("The answer is: A cold. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question7():
+    global name
+    global points
+    print("\nOkay",name,", question 7: If you had only one match and entered a dark room containing an oil lamp, some kindling, and a newspaper, which would you light first?")
+    answer = str(input("Answer: The "))
+    if answer.lower() == "match":
+        points = points+1
+        print("The answer is: The match! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "match":
+        points = points+0
+        print("The answer is: The match. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question8():
+    global name
+    global points
+    print("\nOkay",name,", question 8: In a court case, if the witness claims that the attorney is their brother, but the attorney claims he has no brother, then who is lying?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "neither" or "none":
+        points = points+1
+        print("The answer is: Neither, because the witness was the attorney's sister! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "neither" or "none":
+        points = points+0
+        print("The answer is: Neither, because the witness was the attorney's sister. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question9():
+    global name
+    global points
+    print("\nOkay",name,", question 9: Can a man marry his widow's sister?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "no":
+        points = points+1
+        print("The answer is: No, because he is dead! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "no":
+        points = points+0
+        print("The answer is: No, because he is dead. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question10():
+    global name
+    global points
+    print("\nOkay",name,", question 10: What has a face and hands, but no arms or legs")
+    answer = str(input("Answer: A "))
+    if answer.lower() == "clock":
+        points = points+1
+        print("The answer is: A clock! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "clock":
+        points = points+0
+        print("The answer is: A clock. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question11():
+    global name
+    global points
+    print("\nOkay",name,", question 11: Some months have 31 days, others have 30 days, but how many have 28 days?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "all":
+        points = points+1
+        print("The answer is: All the months! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "all":
+        points = points+0
+        print("The answer is: All the months. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question12():
+    global name
+    global points
+    print("\nOkay",name,", question 12: What has a head, a tail, but nobody?")
+    answer = str(input("Answer: A "))
+    if answer.lower() == "coin":
+        points = points+1
+        print("The answer is: A coin! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "coin":
+        points = points+0
+        print("The answer is: A coin. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question13():
+    global name
+    global points
+    print("\nOkay",name,", question 13: What goes up and down, but never moves?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "stairs" or "stair":
+        points = points+1
+        print("The answer is: Stairs! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "stairs" or "stair":
+        points = points+0
+        print("The answer is: Stairs. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question14():
+    global name
+    global points
+    print("\nOkay",name,", question 14: What word is spelled incorrectly in every single dictionary?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "incorrectly":
+        points = points+1
+        print("The answer is: Incorrectly! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "incorrectly":
+        points = points+0
+        print("The answer is: Incorrectly. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question15():
+    global name
+    global points
+    print("\nOkay",name,", question 15: What gets wetter the more it dries?")
+    answer = str(input("Answer: A "))
+    if answer.lower() == "towel":
+        points = points+1
+        print("The answer is: A towel! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "towel":
+        points = points+0
+        print("The answer is: A towel. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question16():
+    global name
+    global points
+    print("\nOkay",name,", question 16: What can you make that no one - not even yourself - can see it?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "noise":
+        points = points+1
+        print("The answer is: Noise! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "noise":
+        points = points+0
+        print("The answer is: Noise. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question17():
+    global name
+    global points
+    print("\nOkay",name,", question 17: What word starts with an 'e', ends with an 'e', but only has one letter in it?")
+    answer = str(input("Answer: An "))
+    if answer.lower() == "envelope":
+        points = points+1
+        print("The answer is: An envelope! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "envelope":
+        points = points+0
+        print("The answer is: A envelope. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question18():
+    global name
+    global points
+    print("\nOkay",name,", question 18: Rich people want it, poor people have it. If you eat it, you die. What is it?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "nothing":
+        points = points+1
+        print("The answer is: Nothing! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "nothing":
+        points = points+0
+        print("The answer is: Nothing. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question19():
+    global name
+    global points
+    print("\nOkay",name,", question 19: I'm an odd number. Take away one letter and I become even. What number am I?(type out the number letter by letter)")
+    answer = str(input("Answer: "))
+    if answer.lower() == "seven":
+        points = points+1
+        print("The answer is: 7! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "seven":
+        points = points+0
+        print("The answer is: 7. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def question20():
+    global name
+    global points
+    print("\nOkay",name,", final question: What 5 letter word becomes shorter when you add two letters to it?")
+    answer = str(input("Answer: "))
+    if answer.lower() == "short":
+        points = points+1
+        print("The answer is: Short! Congratulations, you get a point!")
+        print("Score:",points,"out of 20")
+    if answer.lower() != "short":
+        points = points+0
+        print("The answer is: Short. Sorry, better luck next time!")
+        print("Score:",points,"out of 20")
+
+
+def restart_function():
+    retry = str(input("\nWould you like to try again? "))
+    if retry.lower() == "yes":
+        main()
+    if retry.lower() != "yes":
+        sys.exit()
+
+def fscoreboard():
+    global name
+    global points
+    print("\n",name,", here is your total score: ",points," out of 20")
+    scoreboard = str(input("Would you like to view the leader board? "))
+    if scoreboard.lower() == "yes":
+        Leaderboardtest = open("Leaderboardtest.txt", 'a+')
+        for line in range(1):
+            Leaderboardtest.write(str(points)+": "+name+"\n")
+        Leaderboardtest.close()
+        Leaderboardtest = open("Leaderboardtest.txt", "r")
+        Leaderboard = Leaderboardtest.read()
+        print(Leaderboard)
+
+def main():
+    fname()
+    question1()
+    question2()
+    question3()
+    question4()
+    question5()
+    question6()
+    question7()
+    question8()
+    question9()
+    question10()
+    question11()
+    question12()
+    question13()
+    question14()
+    question15()
+    question16()
+    question17()
+    question18()
+    question19()
+    question20()
+    fscoreboard()
+    restart_function()
+
+# main program
+
+intro()
+main()
